@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { --rhythm: 1.618rem; }
+
+html { scroll-behavior: smooth; }
+
+html.splash-lock,
+body.splash-lock {
+  overflow: hidden !important;
+  height: 100vh !important;
+  overscroll-behavior: none !important;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+html.splash-lock::-webkit-scrollbar,
+body.splash-lock::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+  display: none !important;
+}
+
+body {
+  font-family: var(--font-raleway), system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  color: #000000;
+  background-color: #ffffff;
+  transition: background-color .12s linear, color .12s linear, border-color .12s linear, fill .12s linear, stroke .12s linear;
+}
+
+.dark body {
+  color: #ffffff;
+  background-color: #000000;
+}
+
+body {
+  --bg: #ffffff;
+  --line: theme(colors.linesLight);
+}
+.dark body {
+  --bg: #000000;
+  --line: theme(colors.linesDark);
+}
+
+body {
+  background:
+    repeating-linear-gradient(0deg, color-mix(in oklab, var(--line) 35%, transparent), color-mix(in oklab, var(--line) 35%, transparent) 1px, transparent 1px, transparent 24px),
+    repeating-linear-gradient(90deg, color-mix(in oklab, var(--line) 35%, transparent), color-mix(in oklab, var(--line) 35%, transparent) 1px, transparent 1px, transparent 24px),
+    var(--bg);
+  background-size: 100% 100%, 100% 100%, auto;
+  filter: saturate(0.9);
+}
+
+.container-narrow { @apply max-w-6xl mx-auto px-4 sm:px-6; }
+.section { padding: calc(var(--rhythm)*2) 0; }
+.card { @apply rounded-2xl shadow-soft bg-white/70 dark:bg-neutral-900/70 backdrop-blur; }
+
+a { @apply underline-offset-4 hover:underline; }
+:focus-visible { outline: 2px dashed theme('colors.accent'); outline-offset: 3px; }
