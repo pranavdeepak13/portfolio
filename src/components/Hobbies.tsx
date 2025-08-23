@@ -7,7 +7,7 @@ import Image from 'next/image'
 
 export default function Hobbies() {
 return (
-<Section id="hobbies" title="How I Spend My Free Time" subtitle="When I'm not using ChatGPT">
+<Section id="hobbies" title="Things I'm Genuinely Interested In" subtitle="When I'm not using Claude to help me">
     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 items-stretch">
     {hobbies.map((h, i) => (
         <Tilt key={h.title} max={10} className="h-full">

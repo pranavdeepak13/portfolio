@@ -39,7 +39,7 @@ export default function Hero() {
           <div className="h-1 w-32 bg-gradient-to-r from-accent via-cyan to-rose rounded mb-4" />
           <h1 className="font-display text-4xl sm:text-5xl mb-3 tracking-tight">Ideate - Design - Build - Test</h1>
           <p className="max-w-2xl opacity-90">
-            I turn everyday headaches into code that just works—because life's too short for manual dashboards and broken recommendation engines.
+            Your Friendly Neighbourhood Developer, With great ideas comes great deal of effort and commitment.
           </p>
 
           <div className="mt-6 flex flex-wrap items-center gap-4">

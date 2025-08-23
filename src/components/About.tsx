@@ -30,16 +30,16 @@ return (
         className="md:col-span-2 card p-6 h-full min-h-[14rem] flex flex-col justify-center"
     >
         <p className="mb-2">
-        I&apos;m a Business Analyst at Flipkart who codes (slightly addicted to automation) and convinced that
-        every manual process is just a script waiting to happen.
+        I&apos;m currently a Business Analyst at Flipkart who codes (slightly addicted to automation) and convinced that
+        every gruntwork done is just a script waiting to be coded.
         </p>
         <p className="mb-2">
-        When I&apos;m not optimizing for better CTR or building dashboards that actually work, I&apos;m probably tinkering with
-        LLMs or wondering if my next side project needs another microservice.
+        When I&apos;m not cohortizing customers or drafting strategies for improving customer engagement, I&apos;m probably working with
+        ML models or contemplating if my next side project needs another complete do over.
         </p>
         <p className="mb-2">
-        From React frontends to BigQuery pipelines, I believe the best solutions are the ones that make you forget
-        the problem ever existed. Currently exploring how AI can be leveraged to solve my day-to-day problems.
+        From Boring Gsheet Dashboards to Graph Neural Networks,I believe the working solution is not always the best or the complex one.
+        Currently exploring how AI can be leveraged to solve my day-to-day problems like doing laundry and deciding what to cook 🤣.
         </p>
     </motion.div>
     </div>

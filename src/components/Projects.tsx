@@ -82,9 +82,9 @@ export default function Projects() {
                 </ul>
               ) : null}
               <div className="flex items-center gap-3">
-                <a href={current.links.demo} target="_blank" rel="noreferrer" className="no-underline">
+                {/* <a href={current.links.demo} target="_blank" rel="noreferrer" className="no-underline">
                   Live
-                </a>
+                </a> */}
                 <span aria-hidden>·</span>
                 <a href={current.links.repo} target="_blank" rel="noreferrer" className="no-underline">
                   Code
