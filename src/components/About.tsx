@@ -30,15 +30,15 @@ return (
         className="md:col-span-2 card p-6 h-full min-h-[14rem] flex flex-col justify-center"
     >
         <p className="mb-2">
-        I&apos;m currently a Business Analyst at Flipkart who codes (slightly addicted to automation) and convinced that
-        every gruntwork done is just a script waiting to be coded.
+        I&apos;m currently working as a Business Analyst at Flipkart who codes and convinced that
+        every gruntwork done is just a script waiting to be coded (slightly addicted to automation).
         </p>
         <p className="mb-2">
         When I&apos;m not cohortizing customers or drafting strategies for improving customer engagement, I&apos;m probably working with
         ML models or contemplating if my next side project needs another complete do over.
         </p>
         <p className="mb-2">
-        From Boring Gsheet Dashboards to Graph Neural Networks,I believe the working solution is not always the best or the complex one.
+        From Boring Gsheet Dashboards to Graph Neural Networks,I believe that the working solution is not always the complex one.
         Currently exploring how AI can be leveraged to solve my day-to-day problems like doing laundry and deciding what to cook 🤣.
         </p>
     </motion.div>
