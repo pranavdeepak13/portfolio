@@ -30,7 +30,7 @@ return (
         className="md:col-span-2 card p-6 h-full min-h-[14rem] flex flex-col justify-center"
     >
         <p className="mb-2">
-        I&apos;m currently working as a Business Analyst at Flipkart who codes and convinced that
+        I&apos;m currently working as a Business Analyst at Flipkart and convinced that
         every gruntwork done is just a script waiting to be coded (slightly addicted to automation).
         </p>
         <p className="mb-2">
