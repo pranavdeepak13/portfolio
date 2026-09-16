@@ -9,3 +9,6 @@ yarn-debug.log*
 pnpm-debug.log*
 .DS_Store
 .vscode/*
+*.tsbuildinfo
+/codex/
+AGENTS.md

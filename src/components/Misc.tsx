@@ -1,42 +1,41 @@
-'use client'
-import Section from './Section'
-import Tilt from './Tilt'
-import { miscItems } from '@/utils/data'
-import { motion } from 'framer-motion'
+import Section from '@/components/Section'
+import type { PortfolioContent } from '@/lib/content/portfolio-schema'
 
-export default function Misc() {
-return (
-<Section id="misc" title="Plot Twists & Side Quests" subtitle="When work gets boring">
-    <div className="space-y-6">
-    {miscItems.map((item, i) => (
-        <Tilt key={item.slug} max={8}>
-        <motion.article
-            className="card p-6 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4"
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.05 }}
-        >
-            <div className="min-w-0 sm:max-w-[48%]">
-            <h3 className="font-display text-xl truncate">{item.title}</h3>
-            <p className="text-sm opacity-75 truncate">{item.subtitle}</p>
-            </div>
-            <div className="flex-1 min-w-0">
-            <p className="opacity-90 text-sm">{item.details}</p>
-            {item.links?.length ? (
-                <div className="mt-3 flex flex-wrap items-center gap-3">
-                {item.links.map(l => (
-                    <a key={l.label} href={l.href} target="_blank" rel="noreferrer" className="no-underline text-sm underline-offset-4 hover:underline">
-                    {l.label}
-                    </a>
-                ))}
-                </div>
-            ) : null}
-            </div>
-        </motion.article>
-        </Tilt>
-    ))}
-    </div>
-</Section>
-)
+interface MiscProps {
+  section: PortfolioContent['sections']['sideQuests']
+  items: PortfolioContent['sideQuests']
+}
+
+export default function Misc({ section, items }: MiscProps) {
+  return (
+    <Section
+      id="misc"
+      title={section.title}
+      subtitle={section.subtitle}
+    >
+      {items.length === 0 && <p className="text-white/55">{section.empty}</p>}
+      <ul className="misc-grid">
+        {items.map((item) => (
+            <li key={item.slug}>
+              <article className="misc-card">
+                <p className="editorial-kicker">{item.title}</p>
+                <h3>{item.subtitle}</h3>
+                <p>{item.details}</p>
+                {item.links?.length ? (
+                  <ul className="mt-5 flex flex-wrap gap-4">
+                    {item.links.map((link) => (
+                      <li key={link.label}>
+                        <a className="text-link" href={link.href} target="_blank" rel="noopener noreferrer">
+                          {link.label} <span aria-hidden>↗</span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
+              </article>
+            </li>
+        ))}
+      </ul>
+    </Section>
+  )
 }

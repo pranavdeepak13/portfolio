@@ -1,46 +1,186 @@
 'use client'
-import { z } from 'zod'
-import { useState } from 'react'
 
-const Schema = z.object({ name: z.string().min(2), email: z.string().email(), message: z.string().min(5) })
+import { useMemo, useRef, useState } from 'react'
+import { createContactValidator } from '@/lib/contact/validation'
+import type { ContactCopy } from '@/lib/content/portfolio-schema'
 
-export default function ContactSticky() {
+type FieldName = 'name' | 'email' | 'message'
+type FieldErrors = Partial<Record<FieldName, string>>
+type Status = { tone: 'idle' | 'success' | 'error'; message: string }
+
+const idleStatus: Status = { tone: 'idle', message: '' }
+
+export default function ContactSticky({ content }: { content: ContactCopy }) {
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
-  const [status, setStatus] = useState<'idle'|'ok'|'err'>('idle')
+  const [errors, setErrors] = useState<FieldErrors>({})
+  const [status, setStatus] = useState<Status>(idleStatus)
+  const dialogRef = useRef<HTMLDialogElement>(null)
+  const triggerRef = useRef<HTMLButtonElement>(null)
+  const nameRef = useRef<HTMLInputElement>(null)
+  const contactValidator = useMemo(() => createContactValidator(content.validation), [content.validation])
 
-  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-    const fd = new FormData(e.currentTarget)
-    const payload = { name: String(fd.get('name')||''), email: String(fd.get('email')||''), message: String(fd.get('message')||'') }
-    const v = Schema.safeParse(payload)
-    if (!v.success) return alert('Please fill all fields correctly.')
+  const openDialog = () => {
+    setOpen(true)
+    setStatus(idleStatus)
+    dialogRef.current?.showModal()
+    requestAnimationFrame(() => nameRef.current?.focus())
+  }
+
+  const closeDialog = () => dialogRef.current?.close()
+
+  const handleClosed = () => {
+    setOpen(false)
+    setErrors({})
+    triggerRef.current?.focus()
+  }
+
+  async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    const form = event.currentTarget
+    const formData = new FormData(form)
+    const payload = {
+      name: String(formData.get('name') ?? ''),
+      email: String(formData.get('email') ?? ''),
+      message: String(formData.get('message') ?? ''),
+      website: String(formData.get('website') ?? '')
+    }
+    const parsed = contactValidator.safeParse(payload)
+
+    if (!parsed.success) {
+      const fieldErrors = parsed.error.flatten().fieldErrors
+      const nextErrors: FieldErrors = {
+        name: fieldErrors.name?.[0],
+        email: fieldErrors.email?.[0],
+        message: fieldErrors.message?.[0]
+      }
+      setErrors(nextErrors)
+      setStatus({ tone: 'error', message: content.messages.invalid })
+      const firstInvalid = (['name', 'email', 'message'] as const).find((field) => nextErrors[field])
+      if (firstInvalid) (form.elements.namedItem(firstInvalid) as HTMLElement | null)?.focus()
+      return
+    }
+
+    setErrors({})
+    setStatus({ tone: 'idle', message: content.messages.sending })
+    setLoading(true)
+
     try {
-      setLoading(true)
-      const res = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type':'application/json' }, body: JSON.stringify(payload) })
-      if (!res.ok) throw new Error()
-      setStatus('ok'); (e.target as HTMLFormElement).reset()
-    } catch { setStatus('err') } finally { setLoading(false) }
+      const result = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(parsed.data)
+      })
+      const body = await result.json().catch(() => null) as { delivery?: string; error?: string } | null
+
+      if (result.ok && body?.delivery === 'sent') {
+        form.reset()
+        setStatus({ tone: 'success', message: content.messages.success })
+      } else if (result.status === 429) {
+        setStatus({ tone: 'error', message: content.messages.rateLimited })
+      } else {
+        setStatus({ tone: 'error', message: content.messages.failure })
+      }
+    } catch {
+      setStatus({ tone: 'error', message: content.messages.network })
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
-    <div className="fixed bottom-4 right-4 z-50">
-      <button onClick={()=>setOpen(o=>!o)} className="rounded-lg bg-accent text-black px-3 py-2 shadow-soft">
-        {open ? 'Close' : 'Contact'}
+    <>
+      <button
+        ref={triggerRef}
+        type="button"
+        className="contact-trigger interactive-target"
+        aria-expanded={open}
+        aria-controls="contact-dialog"
+        onClick={openDialog}
+      >
+        {content.triggerLabel}
       </button>
-      {open && (
-        <div className="mt-2 w-72 rounded-xl shadow-soft bg-white/80 dark:bg-concrete-800/70 backdrop-blur p-3 text-sm">
-          <p className="font-dots mb-2">leave a note</p>
-          <form onSubmit={onSubmit} className="space-y-2">
-            <input name="name" placeholder="Name" className="w-full rounded border border-concrete-200 dark:border-white/20 bg-transparent px-2 py-1" />
-            <input name="email" type="email" placeholder="Email" className="w-full rounded border border-concrete-200 dark:border-white/20 bg-transparent px-2 py-1" />
-            <textarea name="message" rows={3} placeholder="Message" className="w-full rounded border border-concrete-200 dark:border-white/20 bg-transparent px-2 py-1" />
-            <button disabled={loading} className="w-full rounded bg-accent text-black py-1.5">{loading ? 'Sending…' : 'Send'}</button>
-          </form>
-          {status==='ok' && <p className="mt-2 text-green-700">Sent!</p>}
-          {status==='err' && <p className="mt-2 text-red-600">Error. Try again.</p>}
+
+      <dialog
+        ref={dialogRef}
+        id="contact-dialog"
+        className="contact-dialog"
+        aria-labelledby="contact-title"
+        aria-describedby="contact-intro"
+        onClose={handleClosed}
+      >
+        <div className="project-dialog-header">
+          <div>
+            <p className="editorial-kicker">{content.eyebrow}</p>
+            <h2 id="contact-title">{content.title}</h2>
+          </div>
+          <button type="button" className="dialog-close interactive-target" aria-label={content.closeLabel} onClick={closeDialog}>
+            <span aria-hidden>×</span>
+          </button>
         </div>
-      )}
-    </div>
+        <p id="contact-intro" className="mt-4 max-w-[50ch] text-sm leading-relaxed text-white/60">
+          {content.intro}
+        </p>
+
+        <form className="contact-form" onSubmit={onSubmit} noValidate>
+          <div className="contact-field">
+            <label htmlFor="contact-name">{content.fields.name.label}</label>
+            <input
+              ref={nameRef}
+              id="contact-name"
+              name="name"
+              autoComplete={content.fields.name.autoComplete}
+              required
+              maxLength={80}
+              aria-invalid={Boolean(errors.name)}
+              aria-describedby={errors.name ? 'contact-name-error' : undefined}
+            />
+            {errors.name && <p id="contact-name-error" className="field-error">{errors.name}</p>}
+          </div>
+
+          <div className="contact-field">
+            <label htmlFor="contact-email">{content.fields.email.label}</label>
+            <input
+              id="contact-email"
+              name="email"
+              type="email"
+              inputMode="email"
+              autoComplete={content.fields.email.autoComplete}
+              required
+              maxLength={254}
+              aria-invalid={Boolean(errors.email)}
+              aria-describedby={errors.email ? 'contact-email-error' : undefined}
+            />
+            {errors.email && <p id="contact-email-error" className="field-error">{errors.email}</p>}
+          </div>
+
+          <div className="contact-field">
+            <label htmlFor="contact-message">{content.fields.message.label}</label>
+            <textarea
+              id="contact-message"
+              name="message"
+              rows={5}
+              required
+              maxLength={4000}
+              aria-invalid={Boolean(errors.message)}
+              aria-describedby={errors.message ? 'contact-message-error' : undefined}
+            />
+            {errors.message && <p id="contact-message-error" className="field-error">{errors.message}</p>}
+          </div>
+
+          <div className="contact-honeypot" aria-hidden="true">
+            <label htmlFor="contact-website">{content.fields.website.label}</label>
+            <input id="contact-website" name="website" tabIndex={-1} autoComplete="off" />
+          </div>
+
+          <button type="submit" className="button-primary interactive-target mt-1" disabled={loading}>
+            {loading ? content.submittingLabel : content.submitLabel}
+          </button>
+          <p className={`contact-status contact-status-${status.tone}`} role="status" aria-live="polite">
+            {status.message}
+          </p>
+        </form>
+      </dialog>
+    </>
   )
 }

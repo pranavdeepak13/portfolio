@@ -1,7 +1,10 @@
 'use client'
 import { motion } from 'framer-motion'
+import { useSystemCopy } from '@/components/SystemCopyProvider'
 
 export default function Loading() {
+  const copy = useSystemCopy()
+
   return (
     <div className="container-narrow section">
       <div className="card p-6 flex items-center gap-6">
@@ -16,8 +19,8 @@ export default function Loading() {
             animate={{ y: [0, 10, 0] }} transition={{ repeat: Infinity, duration: 1.6 }} />
         </motion.div>
         <div>
-          <p className="font-display text-lg">Under construction…</p>
-          <p className="font-dots text-sm opacity-80">assembling components</p>
+          <p className="font-display text-lg">{copy.loading.title}</p>
+          <p className="font-dots text-sm opacity-80">{copy.loading.detail}</p>
         </div>
       </div>
     </div>

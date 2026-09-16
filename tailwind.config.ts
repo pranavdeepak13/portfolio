@@ -6,10 +6,10 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        display: ['var(--font-raleway)'],
-        dots: ['var(--font-raleway-dots)'],
-        gimmick: ['var(--font-orbitron)'],
-        body: ['var(--font-raleway)']
+        display: ['Arial', 'Helvetica', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        dots: ['Arial', 'Helvetica', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        gimmick: ['Arial', 'Helvetica', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        body: ['Arial', 'Helvetica', 'ui-sans-serif', 'system-ui', 'sans-serif']
       },
       colors: {
         concrete: { 50: '#f7f8fa', 100: '#eef1f3', 200: '#d8dee6', 800: '#1a1f27', 900: '#0b1016' },
