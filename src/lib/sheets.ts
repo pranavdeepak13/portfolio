@@ -1,58 +1,71 @@
 import 'server-only'
+import { neutralizeSpreadsheetCell } from '@/lib/contact/format'
 
 type AppendArgs = {
-name: string
-email: string
-message: string
-status: 'email_sent' | 'email_failed' | 'logged_only'
-ip?: string
-ua?: string
-referer?: string
+  name: string
+  email: string
+  message: string
+  status: 'email_sent' | 'email_failed'
 }
+
+export type SheetAppendResult =
+  | { ok: true }
+  | { ok: false; reason: 'not_configured' | 'failed' }
 
 function getPrivateKey() {
-const b64 = process.env.GOOGLE_SERVICE_ACCOUNT_KEY_B64
-if (b64) {
-try { return Buffer.from(b64, 'base64').toString('utf8') } catch { /* noop */ }
-}
-const k = process.env.GOOGLE_SERVICE_ACCOUNT_KEY || ''
-return k.replace(/\\n/g, '\n')
+  const base64Key = process.env.GOOGLE_SERVICE_ACCOUNT_KEY_B64
+  if (base64Key) {
+    try {
+      return Buffer.from(base64Key, 'base64').toString('utf8')
+    } catch {
+      return ''
+    }
+  }
+
+  return (process.env.GOOGLE_SERVICE_ACCOUNT_KEY ?? '').replace(/\\n/g, '\n')
 }
 
-export async function appendContactRow(a: AppendArgs): Promise<{ ok: boolean }> {
-const spreadsheetId = process.env.GOOGLE_SHEETS_SPREADSHEET_ID
-const sheetName = process.env.GOOGLE_SHEETS_TAB_NAME || 'Contact'
-const clientEmail = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL
-const privateKey = getPrivateKey()
-if (!spreadsheetId || !clientEmail || !privateKey) return { ok: false }
+export async function appendContactRow(args: AppendArgs): Promise<SheetAppendResult> {
+  const spreadsheetId = process.env.GOOGLE_SHEETS_SPREADSHEET_ID
+  const sheetName = process.env.GOOGLE_SHEETS_TAB_NAME || 'Contact'
+  const clientEmail = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL
+  const privateKey = getPrivateKey()
 
-try {
-const { google } = await import('googleapis')
-const auth = new google.auth.JWT({
-    email: clientEmail,
-    key: privateKey,
-    scopes: ['https://www.googleapis.com/auth/spreadsheets']
-})
-const sheets = google.sheets({ version: 'v4', auth })
-const values = [[
-    new Date().toISOString(),
-    a.name,
-    a.email,
-    a.message,
-    a.status,
-    a.ip || '',
-    a.ua || '',
-    a.referer || ''
-]]
+  if (!spreadsheetId || !clientEmail || !privateKey) {
+    return { ok: false, reason: 'not_configured' }
+  }
 
-await sheets.spreadsheets.values.append({
-    spreadsheetId,
-    range: `${sheetName}!A1`,
-    valueInputOption: 'USER_ENTERED',
-    requestBody: { values }
-})
-return { ok: true }
-} catch {
-return { ok: false }
-}
+  try {
+    const { google } = await import('googleapis')
+    const auth = new google.auth.JWT({
+      email: clientEmail,
+      key: privateKey,
+      scopes: ['https://www.googleapis.com/auth/spreadsheets']
+    })
+    const sheets = google.sheets({ version: 'v4', auth })
+    const safeSheetName = sheetName.replace(/'/g, "''")
+    const values = [[
+      new Date().toISOString(),
+      neutralizeSpreadsheetCell(args.name),
+      neutralizeSpreadsheetCell(args.email),
+      neutralizeSpreadsheetCell(args.message),
+      args.status
+    ]]
+
+    await Promise.race([
+      sheets.spreadsheets.values.append({
+        spreadsheetId,
+        range: `'${safeSheetName}'!A1`,
+        valueInputOption: 'RAW',
+        requestBody: { values }
+      }),
+      new Promise((_, reject) => {
+        setTimeout(() => reject(new Error('sheets_timeout')), 5000)
+      })
+    ])
+
+    return { ok: true }
+  } catch {
+    return { ok: false, reason: 'failed' }
+  }
 }

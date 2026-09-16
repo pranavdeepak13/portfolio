@@ -1,105 +1,130 @@
 'use client'
-import Section from './Section'
-import { projects } from '@/utils/data'
-import Tilt from './Tilt'
-import { motion, AnimatePresence } from 'framer-motion'
-import { useState } from 'react'
 
-const chipClasses = [
-  'bg-accent/30 text-neutral-900 dark:text-neutral-100',
-  'bg-cyan/20 text-neutral-900 dark:text-neutral-100',
-  'bg-rose/20 text-neutral-900 dark:text-neutral-100',
-  'bg-moss/20 text-neutral-900 dark:text-neutral-100',
-  'bg-amber/20 text-neutral-900 dark:text-neutral-100',
-  'bg-purple/20 text-neutral-900 dark:text-neutral-100'
-]
+import { useEffect, useRef, useState } from 'react'
+import Section from '@/components/Section'
+import type { PortfolioContent } from '@/lib/content/portfolio-schema'
 
-export default function Projects() {
-  const [active, setActive] = useState<string | null>(null)
-  const current = projects.find(p => p.slug === active)
+interface ProjectsProps {
+  section: PortfolioContent['sections']['projects']
+  items: PortfolioContent['projects']
+}
+
+export default function Projects({ section, items }: ProjectsProps) {
+  const [activeSlug, setActiveSlug] = useState<string | null>(null)
+  const dialogRef = useRef<HTMLDialogElement>(null)
+  const closeButtonRef = useRef<HTMLButtonElement>(null)
+  const triggerRef = useRef<HTMLButtonElement | null>(null)
+  const current = items.find((project) => project.slug === activeSlug)
+
+  useEffect(() => {
+    if (!current || !dialogRef.current) return
+    dialogRef.current.showModal()
+    closeButtonRef.current?.focus()
+  }, [current])
+
+  const openProject = (slug: string, trigger: HTMLButtonElement) => {
+    triggerRef.current = trigger
+    setActiveSlug(slug)
+  }
+
+  const closeProject = () => {
+    dialogRef.current?.close()
+  }
+
+  const handleClosed = () => {
+    setActiveSlug(null)
+    triggerRef.current?.focus()
+  }
 
   return (
-    <Section id="projects" title="Things I've Built (That Actually Work)" subtitle="Trial by error, heavy on the trial">
-      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
-        {projects.map((p, i) => (
-          <Tilt key={p.slug} className="cursor-pointer" onClick={() => setActive(p.slug)} max={12}>
-            <motion.article
-              className="card p-6 h-full"
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.05 }}
-              whileHover={{ scale: 1.05 }}
-            >
-              <header className="mb-2">
-                <h3 className="font-display text-xl">{p.title}</h3>
-                <p className="text-sm opacity-75">{p.subtitle}</p>
-              </header>
-              <p className="opacity-90 text-sm">{p.description}</p>
-              <ul className="mt-3 flex flex-wrap gap-2">
-                {p.tech.map((t, j) => (
-                  <span
-                    key={t}
-                    className={`text-xs rounded-full px-2 py-1 ring-1 ring-inset ring-black/5 dark:ring-white/10 ${chipClasses[j % chipClasses.length]}`}
-                  >
-                    {t}
-                  </span>
-                ))}
-              </ul>
-            </motion.article>
-          </Tilt>
-        ))}
-      </div>
-
-      <AnimatePresence>
-        {current && (
-          <motion.div
-            className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
-            <motion.div
-              role="dialog"
-              aria-modal="true"
-              className="card max-w-3xl w-full p-6"
-              initial={{ scale: 0.96 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0.96 }}
-            >
-              <header className="mb-3">
-                <h3 className="font-display text-2xl">{current.title}</h3>
-                <p className="text-sm opacity-75">{current.subtitle}</p>
-              </header>
-              <p className="mb-4">{current.details ?? current.description}</p>
-              {current.metrics?.length ? (
-                <ul className="mb-4 grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
-                  {current.metrics.map(m => (
-                    <li key={m} className="rounded bg-white/60 dark:bg-white/10 px-3 py-2">
-                      {m}
-                    </li>
+    <Section
+      id="projects"
+      title={section.title}
+      subtitle={section.subtitle}
+    >
+      {items.length === 0 && <p className="text-white/55">{section.empty}</p>}
+      <ul className="projects-grid">
+        {items.map((project) => (
+          <li key={project.slug}>
+            <article className="project-card">
+              <button
+                type="button"
+                className="project-card-trigger"
+                aria-haspopup="dialog"
+                aria-label={`View details for ${project.title}`}
+                onClick={(event) => openProject(project.slug, event.currentTarget)}
+              />
+              <div className="project-card-copy">
+                <p className="editorial-kicker">{project.subtitle}</p>
+                <h3>{project.title}</h3>
+                <p>{project.description}</p>
+                <ul className="tag-list mt-5" aria-label={`${project.title} technologies`}>
+                  {project.tech.map((technology) => (
+                    <li key={technology}>{technology}</li>
                   ))}
                 </ul>
-              ) : null}
-              <div className="flex items-center gap-3">
-                {/* <a href={current.links.demo} target="_blank" rel="noreferrer" className="no-underline">
-                  Live
-                </a> */}
-                <span aria-hidden>·</span>
-                <a href={current.links.repo} target="_blank" rel="noreferrer" className="no-underline">
-                  Code
-                </a>
               </div>
-              <button
-                onClick={() => setActive(null)}
-                className="mt-6 px-3 py-2 rounded border border-concrete-200 dark:border-white/20"
-              >
-                Close
-              </button>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            </article>
+          </li>
+        ))}
+      </ul>
+
+      {current && (
+        <dialog
+          ref={dialogRef}
+          className="project-dialog"
+          aria-labelledby={`project-${current.slug}-title`}
+          aria-describedby={`project-${current.slug}-description`}
+          onClose={handleClosed}
+        >
+          <div className="project-dialog-header">
+            <div>
+              <p className="editorial-kicker">{current.subtitle}</p>
+              <h2 id={`project-${current.slug}-title`}>{current.title}</h2>
+            </div>
+            <button
+              ref={closeButtonRef}
+              type="button"
+              className="dialog-close interactive-target"
+              aria-label={`Close ${current.title} details`}
+              onClick={closeProject}
+            >
+              <span aria-hidden>×</span>
+            </button>
+          </div>
+
+          <p id={`project-${current.slug}-description`} className="mt-6 leading-relaxed text-white/70">
+            {current.details ?? current.description}
+          </p>
+
+          {current.metrics?.length ? (
+            <ul className="mt-6 grid gap-2 sm:grid-cols-2">
+              {current.metrics.map((metric) => (
+                <li key={metric} className="rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white/70">
+                  {metric}
+                </li>
+              ))}
+            </ul>
+          ) : null}
+
+          <ul className="mt-7 flex flex-wrap gap-3">
+            {current.links.repo && (
+              <li>
+                <a className="button-primary interactive-target" href={current.links.repo} target="_blank" rel="noopener noreferrer">
+                  {section.codeLabel} <span aria-hidden>↗</span>
+                </a>
+              </li>
+            )}
+            {current.links.demo && (
+              <li>
+                <a className="button-secondary interactive-target" href={current.links.demo} target="_blank" rel="noopener noreferrer">
+                  {section.demoLabel} <span aria-hidden>↗</span>
+                </a>
+              </li>
+            )}
+          </ul>
+        </dialog>
+      )}
     </Section>
   )
 }

@@ -1,48 +1,53 @@
-'use client'
 import Image from 'next/image'
-import Section from './Section'
-import { motion } from 'framer-motion'
+import Section from '@/components/Section'
+import type { PortfolioContent } from '@/lib/content/portfolio-schema'
 
-export default function About() {
-return (
-<Section id="about" title="Me Introducing Myself" subtitle="How I went from debugging code to debugging life choices">
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
-    <motion.div
-        initial={{ opacity: 0, y: 12 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="md:col-span-1 card h-full min-h-[14rem] flex items-center justify-center overflow-hidden rounded-2xl"
-    >
-        <Image
-        src="/images/about/profile.jpg"
-        alt="Portrait of Pd"
-        width={180}
-        height={240}
-        className="h-48 w-36 md:h-56 md:w-40 object-cover rounded-xl"
-        priority={false}
-        />
-    </motion.div>
+interface AboutProps {
+  content: PortfolioContent['about']
+  socials: PortfolioContent['site']['socials']
+  socialsLabel: PortfolioContent['site']['socialsLabel']
+}
 
-    <motion.div
-        initial={{ opacity: 0, y: 12 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="md:col-span-2 card p-6 h-full min-h-[14rem] flex flex-col justify-center"
-    >
-        <p className="mb-2">
-        I&apos;m currently working as a Business Analyst at Flipkart and convinced that
-        every gruntwork done is just a script waiting to be coded (slightly addicted to automation).
-        </p>
-        <p className="mb-2">
-        When I&apos;m not cohortizing customers or drafting strategies for improving customer engagement, I&apos;m probably working with
-        ML models or contemplating if my next side project needs another complete do over.
-        </p>
-        <p className="mb-2">
-        From Boring Gsheet Dashboards to Graph Neural Networks,I believe that the working solution is not always the complex one.
-        Currently exploring how AI can be leveraged to solve my day-to-day problems like doing laundry and deciding what to cook 🤣.
-        </p>
-    </motion.div>
-    </div>
-</Section>
-)
+export default function About({ content, socials, socialsLabel }: AboutProps) {
+  return (
+    <Section id="about">
+      <div className="about-grid">
+        <div className="about-portrait">
+          <Image
+            src={content.portrait.src}
+            alt={content.portrait.alt}
+            fill
+            sizes="(min-width: 768px) 360px, calc(100vw - 56px)"
+            className="about-portrait-image"
+          />
+        </div>
+
+        <div className="about-copy">
+          <p className="editorial-kicker">{content.eyebrow}</p>
+          <h3>{content.headline}</h3>
+          {content.paragraphs.map((paragraph) => (
+            <p key={paragraph}>{paragraph}</p>
+          ))}
+
+          <div className="mt-8 flex flex-wrap gap-3">
+            {content.actions.map((action) => (
+              <a key={action.href} href={action.href} className="button-secondary interactive-target">
+                {action.label}
+              </a>
+            ))}
+          </div>
+
+          <ul aria-label={socialsLabel} className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-white/55">
+            {socials.map((social) => (
+              <li key={social.label}>
+                <a className="text-link" href={social.href} target="_blank" rel="noopener noreferrer">
+                  {social.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </Section>
+  )
 }

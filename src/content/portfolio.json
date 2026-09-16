@@ -1,0 +1,340 @@
+{
+  "site": {
+    "name": "Pranav Deepak",
+    "mark": "PD .",
+    "role": "Analyst, developer, cinephile",
+    "language": "en",
+    "metadata": {
+      "title": "Portfolio",
+      "description": "A portfolio made with Next.js and Tailwind CSS."
+    },
+    "resume": {
+      "label": "Résumé",
+      "fallbackUrl": "https://drive.google.com/file/d/10cE8D6shQdpG8EGgHJDRnYfshsN_Iki4/view?usp=sharing"
+    },
+    "socials": [
+      { "label": "GitHub", "href": "https://github.com/pranavdeepak13" },
+      { "label": "LinkedIn", "href": "https://www.linkedin.com/in/pranav-deepak13/" },
+      { "label": "Medium", "href": "https://medium.com/@pranavdeepak13" },
+      { "label": "Letterboxd", "href": "https://letterboxd.com/pranavdeepak13/" }
+    ],
+    "socialsLabel": "Social profiles",
+    "footer": "© {year} · {name}"
+  },
+  "interface": {
+    "skipToContentLabel": "Skip to content",
+    "loading": {
+      "title": "Under construction…",
+      "detail": "assembling components"
+    },
+    "error": {
+      "title": "Ik you want to see my portfolio badly 😔 , please try reloading the page.",
+      "reloadLabel": "Reload"
+    }
+  },
+  "navigation": {
+    "primaryLabel": "Primary navigation",
+    "mobileLabel": "Mobile navigation",
+    "menuOpenLabel": "Open navigation menu",
+    "menuCloseLabel": "Close navigation menu",
+    "menuLabel": "Menu",
+    "backToTopLabel": "Pranav Deepak, back to top",
+    "primary": [
+      { "label": "About", "href": "/#about" },
+      { "label": "Experience", "href": "/#experience" },
+      { "label": "Projects", "href": "/#projects" },
+      { "label": "Side Quests", "href": "/#misc" },
+      { "label": "Blog", "href": "/blog" }
+    ],
+    "secondaryLabel": "Blog and recommendations",
+    "secondary": [
+      { "id": "blog", "label": "Blog", "href": "/blog" },
+      { "id": "recommendations", "label": "Recommendations", "href": "/recommendations" }
+    ]
+  },
+  "hero": {
+    "markLabel": "PD",
+    "ambientTop": "SCIENCE · ENGINEERING",
+    "ambientBottom": "ART · DESIGN",
+    "scrollLabel": "Scroll",
+    "scrollHref": "#about"
+  },
+  "about": {
+    "eyebrow": "Pranav Deepak",
+    "headline": "Business Analyst at Flipkart, developer by instinct.",
+    "portrait": {
+      "src": "/images/about/profile.jpg",
+      "alt": "Portrait of Pranav Deepak in a sunlit cave."
+    },
+    "paragraphs": [
+      "I turn gruntwork into scripts, dashboards into decisions, and most weekends into another rewrite. Slightly addicted to automation, unapologetically.",
+      "When I am not cohortizing customers or drafting engagement strategy, I am working with ML models or wondering whether the side project needs another complete do-over. From straightforward GSheet dashboards to graph neural networks, the working solution is rarely the complex one."
+    ],
+    "actions": [
+      { "label": "Explore projects", "href": "/#projects" },
+      { "label": "Read the writing", "href": "/blog" }
+    ]
+  },
+  "sections": {
+    "experience": {
+      "title": "Experience",
+      "subtitle": "From bugs to business impact.",
+      "empty": "No experience entries yet."
+    },
+    "projects": {
+      "title": "Projects",
+      "subtitle": "Trial by error, heavy on the trial.",
+      "empty": "No projects yet.",
+      "codeLabel": "View code",
+      "demoLabel": "Live project"
+    },
+    "sideQuests": {
+      "title": "Side Quests",
+      "subtitle": "Research and work that does not fit a single label.",
+      "empty": "No side quests yet."
+    },
+    "writing": {
+      "title": "Writing",
+      "metadata": {
+        "title": "Blog",
+        "description": "Writing by {name}."
+      },
+      "viewAllLabel": "View all writing",
+      "empty": "No published writing yet.",
+      "previewLimit": 3
+    },
+    "recommendations": {
+      "title": "Recommendations",
+      "viewAllLabel": "View all recommendations",
+      "empty": "No recommendations yet."
+    },
+    "hobbies": {
+      "title": "Hobbies",
+      "subtitle": "The interests that reset my attention.",
+      "empty": "No hobbies yet."
+    }
+  },
+  "experience": [
+    {
+      "id": "flipkart-business-analyst",
+      "period": "Jul 2025 - Present",
+      "title": "Business Analyst · Flipkart",
+      "summary": "Leading Payment Analytics currently and led Recommendation Analytics handling analytical solutioning for Hyperlocal Replenishment and Customer Engagement with multiple Reco Systems across a variety of use cases",
+      "stack": ["Python", "SQL", "BigQuery", "PySpark", "R"]
+    },
+    {
+      "id": "bnp-paribas-sde-intern",
+      "period": "Jan 2024 - Jul 2024",
+      "title": "SDE Intern · BNP Paribas ISPL",
+      "summary": "Built ETL pipelines for financial data sources and handled source control migration from Visual Source Safe to Bitbucket.",
+      "stack": ["Bitbucket", "Microsoft VSS", "Shell Scripting", "Informatica PowerCenter Suite"]
+    },
+    {
+      "id": "sony-ssup-research-intern",
+      "period": "Oct 2022 - Dec 2023",
+      "title": "Research Intern · Sony SSUP",
+      "summary": "Led integration team to enable microcontroller data accessibility on the cloud platform. Redesigned backend to microservices architecture and rebuilt the complete dashboard frontend",
+      "stack": ["GraphDB Ontotext", "MQTT", "MERN", "InfluxDB"]
+    },
+    {
+      "id": "l-and-t-construction-application-development-intern",
+      "period": "Aug 2022 - Sep 2022",
+      "title": "Application Development Intern · L&T Construction",
+      "summary": "Developed backend Web APIs and built multiple web components for site evaluation client applications.",
+      "stack": ["ASP.NET Core", "Angular", "MS SQL", "Postman"]
+    },
+    {
+      "id": "amrita-vishwa-vidyapeetham-undergraduate-student",
+      "period": "Oct 2020 - Jul 2024",
+      "title": "Undergraduate Student · Amrita Vishwa Vidyapeetham, Coimbatore",
+      "summary": "Got my B.Tech in Computer Science and Engineering & found my passion for technology and design.",
+      "stack": ["Data Science", "Full Stack Dev", "Computer Networks"]
+    }
+  ],
+  "projects": [
+    {
+      "slug": "amusify",
+      "title": "Amusify",
+      "subtitle": "Music Recommendation & Analytics App",
+      "description": "Music recommendation dashboard with analytics built using Spotify API.",
+      "details": "Content-based filtering algorithms with real-time music data integration.",
+      "tech": ["Python", "Streamlit", "Spotify API"],
+      "metrics": ["Real-time recommendations", "Content-based filtering"],
+      "links": { "repo": "https://github.com/pranavdeepak13/Amusify" }
+    },
+    {
+      "slug": "facdash",
+      "title": "FacDash",
+      "subtitle": "Comprehensive Faculty Dashboard",
+      "description": "Full-stack faculty management system with worklog tracking and scheduling.",
+      "details": "Multi-role authentication system supporting Admin, Faculty, and Student profiles.",
+      "tech": ["ReactJS", "NodeJS", "ExpressJS", "MySQL"],
+      "metrics": ["JWT Authentication", "API Gateway Security", "RBAC", "Interactive UI"],
+      "links": { "repo": "https://github.com/pranavdeepak13/FacultyDashboard" }
+    },
+    {
+      "slug": "newsner",
+      "title": "NewsNER",
+      "subtitle": "Information Extraction & Classification Tool",
+      "description": "NLP-powered information extraction tool fine-tuned for Hindi news articles.",
+      "details": "Fine-tuned LLMs with robust NLP concepts for categorical classification of regional language news articles.",
+      "tech": ["Python", "NLTK", "Spacy", "HuggingFace"],
+      "metrics": ["Fine-tuned LLMs", "Regional dialect support"],
+      "links": { "repo": "https://github.com/pranavdeepak13/NewsNER" }
+    },
+    {
+      "slug": "clustersense",
+      "title": "ClusterSense",
+      "subtitle": "Customer Segmentation Analysis",
+      "description": "Customer segmentation analysis to identify key groups and tailor marketing strategies for a retail sales dataset.",
+      "details": "K-means clustering with comprehensive data visualization and insights.",
+      "tech": ["Python", "R", "scikit-learn", "Pandas"],
+      "metrics": ["K-means clustering", "Marketing strategy insights"],
+      "links": {}
+    }
+  ],
+  "sideQuests": [
+    {
+      "slug": "research-paper",
+      "title": "Research Publication",
+      "subtitle": "Content-Agnostic Community Classification",
+      "details": "Meta-graph representations of conversational dynamics for community classification (OSNEM 2025 - In peer-review).",
+      "links": [{ "label": "Preprint", "href": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5238558" }]
+    },
+    {
+      "slug": "hackathon-winner",
+      "title": "Hackathon",
+      "subtitle": "Flipkart AnalytiQ Hackathon 2025 - Winner",
+      "details": "Built post-order RTO (Return to Origin) prediction system for reducing logistics costs for high order volume BUs.",
+      "links": []
+    },
+    {
+      "slug": "conf-paper",
+      "title": "Paper Presentation",
+      "subtitle": "Annual Flipkart DS Conference 2025",
+      "details": "Presented seasonality and weather-based product weights for recommendation systems focusing on replenishment strategies.",
+      "links": []
+    },
+    {
+      "slug": "certifications",
+      "title": "Certifications",
+      "subtitle": "Machine Learning & Deep Learning Specializations",
+      "details": "Completed comprehensive Coursera specializations covering ML algorithms and deep learning architectures.",
+      "links": []
+    }
+  ],
+  "writing": {
+    "notFoundTitle": "Article not found",
+    "backLabel": "← All writing",
+    "indexLabel": "Published articles",
+    "readLabel": "Read"
+  },
+  "recommendations": {
+    "previewLimit": 3,
+    "countsLabel": "Collection counts",
+    "booksTitle": "Books",
+    "booksLabel": "Recommended books",
+    "labels": {
+      "book": "Book",
+      "movie": "Film",
+      "video": "Video",
+      "article": "Article",
+      "editorial": "Videos & reads"
+    },
+    "shelfTitle": "The shelf",
+    "shelfNote": "Height is how much it changed me",
+    "filmsTitle": "Films",
+    "editorialTitle": "Videos and reads",
+    "letterboxd": { "label": "Letterboxd", "href": "https://letterboxd.com/pranavdeepak13/" },
+    "items": [
+      {
+        "id": "thinking-in-systems",
+        "kind": "book",
+        "title": "Thinking in Systems",
+        "gradient": "citrus"
+      },
+      {
+        "id": "perfect-days",
+        "kind": "movie",
+        "title": "Perfect Days",
+        "gradient": "sunset"
+      },
+      {
+        "id": "what-is-a-gnn",
+        "kind": "video",
+        "title": "But what is a GNN?",
+        "gradient": "cobalt"
+      }
+    ]
+  },
+  "hobbies": [
+    {
+      "id": "pianist",
+      "src": "/images/hobbies/piano.webp",
+      "alt": "Piano keys and a keyboard instrument.",
+      "title": "Pianist",
+      "blurb": "My companion when I'm alone",
+      "objectPosition": "50% 50%"
+    },
+    {
+      "id": "badminton",
+      "src": "/images/hobbies/badminton.webp",
+      "alt": "A badminton racket and shuttlecock on court.",
+      "title": "Badminton",
+      "blurb": "Best sport for relaxation and focus, ngl",
+      "objectPosition": "50% 50%"
+    },
+    {
+      "id": "cinephile",
+      "src": "/images/hobbies/cinema.webp",
+      "alt": "A cinema screen and auditorium representing a love of film.",
+      "title": "Cinephile",
+      "blurb": "Storytelling through visual narratives and cinematography catches my eye",
+      "objectPosition": "50% 50%"
+    },
+    {
+      "id": "swimming",
+      "src": "/images/hobbies/swimming.webp",
+      "alt": "A swimmer moving through a pool.",
+      "title": "Swimming",
+      "blurb": "A refreshing escape",
+      "objectPosition": "50% 50%"
+    }
+  ],
+  "contact": {
+    "triggerLabel": "Contact",
+    "eyebrow": "Get in touch",
+    "title": "Leave a note.",
+    "intro": "Share a little context and I will get back to you when I can.",
+    "closeLabel": "Close contact form",
+    "fields": {
+      "name": { "label": "Name", "autoComplete": "name" },
+      "email": { "label": "Email", "autoComplete": "email" },
+      "message": { "label": "Message" },
+      "website": { "label": "Website" }
+    },
+    "submitLabel": "Send message",
+    "submittingLabel": "Sending…",
+    "validation": {
+      "nameRequired": "Enter your name.",
+      "nameTooShort": "Enter at least 2 characters.",
+      "nameTooLong": "Keep your name under 80 characters.",
+      "nameUnsafe": "Remove line breaks or control characters.",
+      "emailRequired": "Enter your email address.",
+      "emailTooLong": "Keep your email under 254 characters.",
+      "emailInvalid": "Enter a valid email address.",
+      "messageRequired": "Enter a message.",
+      "messageTooShort": "Enter at least 5 characters.",
+      "messageTooLong": "Keep your message under 4,000 characters.",
+      "messageUnsafe": "Remove unsupported control characters."
+    },
+    "messages": {
+      "invalid": "Check the highlighted fields and try again.",
+      "sending": "Sending your message…",
+      "success": "Message sent. Thank you for reaching out.",
+      "rateLimited": "Too many attempts. Please wait before trying again.",
+      "failure": "The message was not sent. Please try again later.",
+      "network": "The message was not sent. Check your connection and try again."
+    }
+  }
+}

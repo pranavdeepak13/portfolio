@@ -4,23 +4,25 @@ export interface SectionProps {
   id?: string
   title?: string
   subtitle?: string
+  action?: ReactNode
   children: ReactNode
 }
 
-export default function Section({ id, title, subtitle, children }: SectionProps) {
+export default function Section({ id, title, subtitle, action, children }: SectionProps) {
+  const headingId = title ? `${id ?? 'section'}-title` : undefined
+
   return (
-    <section id={id} className="section">
+    <section id={id} className="section" aria-labelledby={headingId}>
       <div className="container-narrow">
         {title && (
-          <div className="mb-6">
-            <h2 className="font-display text-3xl tracking-tight">{title}</h2>
-            {subtitle && (
-              <p className="mt-1 text-sm md:text-base font-display font-normal tracking-tight text-neutral-700 dark:text-neutral-300 leading-snug">
-                {subtitle}
-              </p>
-            )}
+          <div className="section-heading">
+            <h2 id={headingId}>{title}</h2>
+            {action ?? (subtitle && (
+              <p>{subtitle}</p>
+            ))}
           </div>
         )}
+        {action && subtitle && <p className="section-intro">{subtitle}</p>}
         {children}
       </div>
     </section>

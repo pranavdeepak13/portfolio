@@ -1,15 +1,25 @@
 'use client'
-import { useScroll, useTransform, MotionValue } from 'framer-motion'
+import { RefObject } from 'react'
+import { MotionValue, useReducedMotion, useScroll, useTransform } from 'framer-motion'
 
 export interface ParallaxLayers {
   ySlow: MotionValue<number>
   yMedium: MotionValue<number>
   yFast: MotionValue<number>
+  cueOpacity: MotionValue<number>
 }
-export const useParallax = (): ParallaxLayers => {
-  const { scrollY } = useScroll()
-  const ySlow = useTransform(scrollY, [0, 800], [0, 40])
-  const yMedium = useTransform(scrollY, [0, 800], [0, 80])
-  const yFast = useTransform(scrollY, [0, 800], [0, 140])
-  return { ySlow, yMedium, yFast }
+
+export const useParallax = (target: RefObject<HTMLElement>): ParallaxLayers => {
+  const reduceMotion = useReducedMotion()
+  const { scrollYProgress } = useScroll({
+    target,
+    offset: ['start start', 'end start']
+  })
+
+  const ySlow = useTransform(scrollYProgress, [0, 1], [0, reduceMotion ? 0 : -56])
+  const yMedium = useTransform(scrollYProgress, [0, 1], [0, reduceMotion ? 0 : -132])
+  const yFast = useTransform(scrollYProgress, [0, 1], [0, reduceMotion ? 0 : -232])
+  const cueOpacity = useTransform(scrollYProgress, [0, 0.28], [1, 0])
+
+  return { ySlow, yMedium, yFast, cueOpacity }
 }
