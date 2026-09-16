@@ -12,7 +12,7 @@ Replace the Hero's scroll-parallax tile field with an interactive circular orbit
 - Hovering a tile makes the full ring complete one quick rotation and enlarges the active tile in its existing orbital position.
 - Leaving the tile restores the settled ring and normal tile scale.
 - The tiles remain purely decorative: they do not navigate or reveal content.
-- With reduced motion enabled, tiles render in the settled ring; hover/focus can use a subtle scale change but never rotate.
+- With reduced motion enabled, tiles render in the settled ring; hover can use a subtle scale change but never rotate.
 
 ## Implementation
 
