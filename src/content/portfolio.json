@@ -2,11 +2,11 @@
   "site": {
     "name": "Pranav Deepak",
     "mark": "PD .",
-    "role": "Analyst, developer, cinephile",
+    "role": "rationalist, developer, cinephile",
     "language": "en",
     "metadata": {
       "title": "Portfolio",
-      "description": "A portfolio made with Next.js and Tailwind CSS."
+      "description": "This is the portfolio of Pranav Deepak. Made with love"
     },
     "resume": {
       "label": "Résumé",
@@ -67,8 +67,8 @@
       "alt": "Portrait of Pranav Deepak in a sunlit cave."
     },
     "paragraphs": [
-      "I turn gruntwork into scripts, dashboards into decisions, and most weekends into another rewrite. Slightly addicted to automation, unapologetically.",
-      "When I am not cohortizing customers or drafting engagement strategy, I am working with ML models or wondering whether the side project needs another complete do-over. From straightforward GSheet dashboards to graph neural networks, the working solution is rarely the complex one."
+      "I turn gruntwork into  scripts, dashboards into decisions, and most weekends into project do-over . Slightly addicted to automation, unapologetically.",
+      "A friendly neighbourhood developer"
     ],
     "actions": [
       { "label": "Explore projects", "href": "/#projects" },
