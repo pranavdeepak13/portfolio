@@ -61,7 +61,7 @@ test('focused content props provide configured collection empty states and previ
   assert.match(writing, /section\.viewAllLabel/)
   const recommendations = await readFile(path.join(root, 'src/components/RecommendationsPreview.tsx'), 'utf8')
   assert.match(recommendations, /slice\(0, content\.previewLimit\)/)
-  assert.match(recommendations, /content\.labels\[item\.kind\]/)
+  assert.match(recommendations, /labels\[item\.kind\]/)
 })
 
 test('homepage source omits the removed Skills section', async () => {
@@ -93,16 +93,77 @@ test('recommendation rendering supports each typed collection and gradient artwo
     readFile(path.join(root, 'src/components/RecommendationArtwork.tsx'), 'utf8')
   ])
 
-  assert.match(recommendations, /content\.labels\[item\.kind\]/)
+  assert.match(recommendations, /labels\[item\.kind\]/)
   assert.match(recommendations, /groups/)
   assert.match(artwork, /recommendation-gradient-/)
   assert.match(artwork, /next\/image/)
 })
 
-test('homepage recommendation section has only a heading and view-all action', async () => {
+test('recommendations give articles their own library section', async () => {
+  const source = await readFile(path.join(root, 'src/components/Recommendations.tsx'), 'utf8')
+
+  assert.match(source, /groups\.videos/)
+  assert.match(source, /groups\.articles/)
+  assert.match(source, /content\.videosTitle/)
+  assert.match(source, /content\.articlesTitle/)
+  assert.doesNotMatch(source, /groups\.editorial/)
+})
+
+test('book spines use the hero-inspired monochrome treatment', async () => {
+  const [bookShelf, css] = await Promise.all([
+    readFile(path.join(root, 'src/components/BookShelf.tsx'), 'utf8'),
+    readFile(path.join(root, 'src/app/globals.css'), 'utf8')
+  ])
+
+  assert.doesNotMatch(bookShelf, /recommendation-gradient-\$\{book\.gradient\}/)
+  assert.match(css, /\.book-spine-object\s*\{[\s\S]*?background:\s*linear-gradient\([^;]*#080808[^;]*#f0f0f0/)
+})
+
+test('book shelf uses upright compact spines for legible vertical titles', async () => {
+  const [bookShelf, css] = await Promise.all([
+    readFile(path.join(root, 'src/components/BookShelf.tsx'), 'utf8'),
+    readFile(path.join(root, 'src/app/globals.css'), 'utf8')
+  ])
+
+  assert.match(bookShelf, /className="book-spine-title"/)
+  assert.match(css, /\.book-shelf\s*\{[\s\S]*?height:\s*clamp\(360px, 40vw, 460px\)/)
+  assert.match(css, /\.book-spine-object\s*\{[\s\S]*?width:\s*clamp\(64px, 7vw, 92px\)/)
+  assert.match(css, /\.book-spine-object h3\s*\{[\s\S]*?font-size:\s*clamp\(1\.05rem, 1\.55vw, 1\.25rem\)/)
+  assert.match(css, /\.book-spine-object h3\s*\{[\s\S]*?writing-mode:\s*vertical-rl/)
+  assert.match(css, /\.movie-entry h3\s*\{[\s\S]*?font-size:\s*clamp\(1rem, 1\.6vw, 1\.12rem\)/)
+})
+
+test('film library presents five posters across on desktop', async () => {
+  const css = await readFile(path.join(root, 'src/app/globals.css'), 'utf8')
+
+  assert.match(css, /\.movie-library\s*\{[\s\S]*?grid-template-columns:\s*repeat\(5, minmax\(0, 1fr\)\)/)
+})
+
+test('recommendations resolve TMDB poster URLs on the server with a fallback', async () => {
+  const tmdbPath = path.join(root, 'src/lib/tmdb.ts')
+  assert.equal(existsSync(tmdbPath), true)
+
+  const [tmdb, page, movies] = await Promise.all([
+    readFile(tmdbPath, 'utf8'),
+    readFile(path.join(root, 'src/app/recommendations/page.tsx'), 'utf8'),
+    readFile(path.join(root, 'src/components/MovieLibrary.tsx'), 'utf8')
+  ])
+
+  assert.match(tmdb, /import 'server-only'/)
+  assert.match(tmdb, /TMDB_API_READ_ACCESS_TOKEN/)
+  assert.match(tmdb, /https:\/\/image\.tmdb\.org\/t\/p\/w500/)
+  assert.match(page, /getMoviePosterUrls/)
+  assert.match(movies, /posterUrls/)
+  assert.match(movies, /RecommendationArtwork/)
+})
+
+test('homepage recommendations use the compact writing-card presentation', async () => {
   const source = await readFile(path.join(root, 'src/components/RecommendationsPreview.tsx'), 'utf8')
 
   assert.match(source, /section\.viewAllLabel/)
+  assert.match(source, /className="home-writing-grid"/)
+  assert.match(source, /className="home-writing-card"/)
+  assert.doesNotMatch(source, /RecommendationArtwork/)
   assert.doesNotMatch(source, /subtitle=/)
 })
 
@@ -212,7 +273,7 @@ test('remaining shell, blog, and collection labels render from focused props', a
     BlogArticle: ['{writing.backLabel}'],
     BookShelf: ['{labels.shelfTitle}', '{labels.shelfNote}', 'labels.booksLabel'],
     MovieLibrary: ['{labels.filmsTitle}', 'labels.letterboxd.href', '{labels.letterboxd.label}'],
-    Recommendations: ['content.countsLabel', '{content.booksTitle}', '{content.filmsTitle}', '{content.labels.editorial}', '{content.editorialTitle}', 'content.labels[item.kind]']
+    Recommendations: ['content.countsLabel', '{content.booksTitle}', '{content.filmsTitle}', '{content.videosTitle}', '{content.articlesTitle}', 'labels[item.kind]']
   }
   for (const [name, expressions] of Object.entries(expected)) {
     const source = await readFile(path.join(root, `src/components/${name}.tsx`), 'utf8')

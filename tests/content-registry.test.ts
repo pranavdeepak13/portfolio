@@ -52,7 +52,7 @@ test('recommendation records have stable ids and safe optional links', () => {
   )
 })
 
-test('editorial recommendations preserve interleaved article and video order', () => {
+test('video and article recommendations preserve their own display order', () => {
   const content = structuredClone(portfolioContent)
   content.recommendations.items = [
     { id: 'first-video', kind: 'video', title: 'First video', gradient: 'cobalt' },
@@ -64,8 +64,12 @@ test('editorial recommendations preserve interleaved article and video order', (
   const groups = getRecommendationGroups(content)
 
   assert.deepEqual(
-    groups.editorial.map((item) => item.id),
-    content.recommendations.items.map((item) => item.id)
+    groups.videos.map((item) => item.id),
+    ['first-video', 'second-video']
+  )
+  assert.deepEqual(
+    groups.articles.map((item) => item.id),
+    ['first-article', 'second-article']
   )
 })
 
