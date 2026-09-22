@@ -141,7 +141,8 @@ const recommendationBaseSchema = z.object({
 
 const bookRecommendationSchema = recommendationBaseSchema.extend({
   kind: z.literal('book'),
-  author: requiredText.nullable().optional()
+  author: requiredText.nullable().optional(),
+  height: z.number().int().min(120).max(240).nullable().optional()
 }).strict()
 const movieRecommendationSchema = recommendationBaseSchema.extend({
   kind: z.literal('movie'),
@@ -172,13 +173,13 @@ const recommendationsSchema = z.object({
     book: requiredText,
     movie: requiredText,
     video: requiredText,
-    article: requiredText,
-    editorial: requiredText
+    article: requiredText
   }).strict(),
   shelfTitle: requiredText,
   shelfNote: requiredText,
   filmsTitle: requiredText,
-  editorialTitle: requiredText,
+  videosTitle: requiredText,
+  articlesTitle: requiredText,
   letterboxd: z.object({ label: requiredText, href: httpsUrl }).strict(),
   items: z.array(recommendationSchema)
 }).strict()

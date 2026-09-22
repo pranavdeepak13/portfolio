@@ -1514,22 +1514,26 @@ textarea {
 
 .book-shelf {
   display: flex;
-  height: 240px;
+  height: clamp(360px, 40vw, 460px);
   min-width: min-content;
   gap: 6px;
   align-items: flex-end;
-  padding-bottom: 6px;
+  border-bottom: 10px solid #1a1a1a;
+  padding: 0 6px 10px;
 }
 
 .book-spine-object {
   display: flex;
-  width: 46px;
+  position: relative;
+  width: clamp(64px, 7vw, 92px);
   flex: none;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
   overflow: hidden;
   border: 1px solid #2a2a2a;
-  border-radius: 6px;
+  border-radius: 5px 5px 2px 2px;
+  background: linear-gradient(105deg, #080808 0%, #484848 48%, #f0f0f0 100%);
+  box-shadow: inset 5px 0 0 rgb(255 255 255 / 9%), 4px 0 0 rgb(255 255 255 / 4%);
   transition: transform 400ms cubic-bezier(.16, .84, .34, 1);
 }
 
@@ -1537,25 +1541,32 @@ textarea {
   transform: translateY(-14px);
 }
 
+.book-spine-object:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 4px;
+}
+
 .book-spine-object h3 {
   max-height: 100%;
   margin: 0;
   overflow: hidden;
-  padding: 10px 0;
+  padding: 16px 12px;
   color: #ffffff;
-  font-size: 11px;
-  font-weight: 500;
-  line-height: 1.2;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  writing-mode: vertical-rl;
+  font-size: clamp(1.05rem, 1.55vw, 1.25rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.12;
+  overflow-wrap: normal;
+  text-align: start;
+  text-shadow: 0 1px 10px rgb(0 0 0 / 75%);
   transform: rotate(180deg);
+  writing-mode: vertical-rl;
 }
 
 .movie-library {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 190px));
-  gap: 16px;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 22px;
 }
 
 .movie-poster-placeholder {
@@ -1569,15 +1580,18 @@ textarea {
 }
 
 .movie-entry h3 {
-  margin: 10px 0 0;
-  font-size: 14px;
-  font-weight: 500;
+  margin: 12px 0 0;
+  color: #ffffff;
+  font-size: clamp(1rem, 1.6vw, 1.12rem);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.35;
 }
 
 .movie-entry > p {
-  margin: 2px 0 0;
-  color: #7a7a7a;
-  font-size: 12.5px;
+  margin: 4px 0 0;
+  color: #a8a8a8;
+  font-size: 14px;
   line-height: 1.5;
 }
 
@@ -1708,6 +1722,11 @@ textarea {
     grid-template-columns: 1fr;
   }
 
+  .movie-library {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
   .about-portrait {
     min-height: 420px;
   }
@@ -1737,6 +1756,10 @@ textarea {
   .home-writing-grid,
   .hobbies-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .movie-library {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 

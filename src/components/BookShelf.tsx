@@ -20,8 +20,10 @@ export default function BookShelf({ books, labels }: BookShelfProps) {
         <ul className="book-shelf">
           {books.map((book, index) => {
             const title = `${book.title}${book.author ? ` by ${book.author}` : ''}`
-            const className = `book-spine-object recommendation-gradient recommendation-gradient-${book.gradient}`
-            const style = { height: `${156 + (index % 5) * 16}px` }
+            const className = 'book-spine-object'
+            const sourceHeight = book.height ?? (176 + (index % 5) * 16)
+            const height = Math.max(290, Math.round(sourceHeight * 1.7))
+            const style = { height: `${height}px` }
 
             return (
               <li key={book.id}>
@@ -34,11 +36,11 @@ export default function BookShelf({ books, labels }: BookShelfProps) {
                     rel="noopener noreferrer"
                     aria-label={`Open ${title}`}
                   >
-                    <h3>{book.title}</h3>
+                    <h3 className="book-spine-title">{book.title}</h3>
                   </a>
                 ) : (
-                  <article className={className} style={style} title={title}>
-                    <h3>{book.title}</h3>
+                  <article className={className} style={style} aria-label={title}>
+                    <h3 className="book-spine-title">{book.title}</h3>
                   </article>
                 )}
               </li>

@@ -6,9 +6,10 @@ type MovieRecommendation = Extract<Recommendation, { kind: 'movie' }>
 interface MovieLibraryProps {
   movies: MovieRecommendation[]
   labels: Pick<PortfolioContent['recommendations'], 'filmsTitle' | 'letterboxd'>
+  posterUrls: Record<string, string>
 }
 
-export default function MovieLibrary({ movies, labels }: MovieLibraryProps) {
+export default function MovieLibrary({ movies, labels, posterUrls }: MovieLibraryProps) {
   if (movies.length === 0) return null
 
   return (
@@ -19,11 +20,12 @@ export default function MovieLibrary({ movies, labels }: MovieLibraryProps) {
       </div>
       <ul className="movie-library">
         {movies.map((movie) => {
+          const posterUrl = posterUrls[movie.id]
           const content = (
             <>
               <RecommendationArtwork
-                image={movie.image}
-                alt={movie.image ? `${movie.title} poster` : ''}
+                image={posterUrl ?? movie.image}
+                alt={posterUrl || movie.image ? `${movie.title} poster` : ''}
                 gradient={movie.gradient}
                 className="movie-poster-placeholder"
               />

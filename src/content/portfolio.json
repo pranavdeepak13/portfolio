@@ -2,11 +2,11 @@
   "site": {
     "name": "Pranav Deepak",
     "mark": "PD .",
-    "role": "Analyst, developer, cinephile",
+    "role": "eclectic, developer, cinephile",
     "language": "en",
     "metadata": {
       "title": "Portfolio",
-      "description": "A portfolio made with Next.js and Tailwind CSS."
+      "description": "This is the portfolio of Pranav Deepak. Made with love"
     },
     "resume": {
       "label": "Résumé",
@@ -60,15 +60,15 @@
     "scrollHref": "#about"
   },
   "about": {
-    "eyebrow": "Pranav Deepak",
-    "headline": "Business Analyst at Flipkart, developer by instinct.",
+    "eyebrow": "Mind over Matter",
+    "headline": "Pranav Deepak",
     "portrait": {
       "src": "/images/about/profile.jpg",
       "alt": "Portrait of Pranav Deepak in a sunlit cave."
     },
     "paragraphs": [
-      "I turn gruntwork into scripts, dashboards into decisions, and most weekends into another rewrite. Slightly addicted to automation, unapologetically.",
-      "When I am not cohortizing customers or drafting engagement strategy, I am working with ML models or wondering whether the side project needs another complete do-over. From straightforward GSheet dashboards to graph neural networks, the working solution is rarely the complex one."
+      "I turn gruntwork into  scripts, dashboards into decisions, and most weekends into project do-over. Addicted to automation, unapologetically.",
+      "A friendly neighbourhood developer, with great ideas comes great deal of effort and commitment."
     ],
     "actions": [
       { "label": "Explore projects", "href": "/#projects" },
@@ -116,10 +116,17 @@
   },
   "experience": [
     {
+      "id": "stellar-ai-senior-ai-engineer",
+      "period": "Aug 2026 - Present",
+      "title": "Senior AI Engineer · Stellar AI Systems",
+      "summary": "Building agentic AI systems for call analytics and lead intelligence, developing STT evaluation pipelines, LLM-based lead scoring, and automated reporting for enterprise clients across retail, logistics, and financial services.",
+      "stack": ["Python", "FastAPI", "LangChain", "PostgreSQL","LLMs"]
+    },
+    {
       "id": "flipkart-business-analyst",
-      "period": "Jul 2025 - Present",
+      "period": "Jul 2025 - Aug 2026",
       "title": "Business Analyst · Flipkart",
-      "summary": "Leading Payment Analytics currently and led Recommendation Analytics handling analytical solutioning for Hyperlocal Replenishment and Customer Engagement with multiple Reco Systems across a variety of use cases",
+      "summary": "Led Product Page, Payment, Recommendation Analytics in a span of 2 years devloping analytical solutions and tracking metrics for hyperlocal replenishment, credit card reco, product page AI interfaces",
       "stack": ["Python", "SQL", "BigQuery", "PySpark", "R"]
     },
     {
@@ -148,7 +155,7 @@
       "period": "Oct 2020 - Jul 2024",
       "title": "Undergraduate Student · Amrita Vishwa Vidyapeetham, Coimbatore",
       "summary": "Got my B.Tech in Computer Science and Engineering & found my passion for technology and design.",
-      "stack": ["Data Science", "Full Stack Dev", "Computer Networks"]
+      "stack": ["Social Network Science", "Full Stack Dev", "Computer Networks"]
     }
   ],
   "projects": [
@@ -198,13 +205,13 @@
       "slug": "research-paper",
       "title": "Research Publication",
       "subtitle": "Content-Agnostic Community Classification",
-      "details": "Meta-graph representations of conversational dynamics for community classification (OSNEM 2025 - In peer-review).",
+      "details": "Meta-graph representations of conversational dynamics for community classification (OSNEM 2026 - In peer-review).",
       "links": [{ "label": "Preprint", "href": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5238558" }]
     },
     {
       "slug": "hackathon-winner",
       "title": "Hackathon",
-      "subtitle": "Flipkart AnalytiQ Hackathon 2025 - Winner",
+      "subtitle": "Flipkart AnalytiQ Hackathon 2025 - Runner Up",
       "details": "Built post-order RTO (Return to Origin) prediction system for reducing logistics costs for high order volume BUs.",
       "links": []
     },
@@ -238,32 +245,395 @@
       "book": "Book",
       "movie": "Film",
       "video": "Video",
-      "article": "Article",
-      "editorial": "Videos & reads"
+      "article": "Article"
     },
     "shelfTitle": "The shelf",
     "shelfNote": "Height is how much it changed me",
     "filmsTitle": "Films",
-    "editorialTitle": "Videos and reads",
+    "videosTitle": "Videos",
+    "articlesTitle": "Articles",
     "letterboxd": { "label": "Letterboxd", "href": "https://letterboxd.com/pranavdeepak13/" },
     "items": [
       {
-        "id": "thinking-in-systems",
+        "id": "tiny-experiments",
         "kind": "book",
-        "title": "Thinking in Systems",
-        "gradient": "citrus"
+        "title": "Tiny Experiments",
+        "author": "Anne-Laure Le Cunff",
+        "height": 216,
+        "gradient": "aurora"
       },
       {
-        "id": "perfect-days",
+        "id": "interstellar",
         "kind": "movie",
-        "title": "Perfect Days",
-        "gradient": "sunset"
+        "title": "Interstellar",
+        "year": "2014",
+        "gradient": "cobalt"
       },
       {
         "id": "what-is-a-gnn",
         "kind": "video",
         "title": "But what is a GNN?",
         "gradient": "cobalt"
+      },
+      {
+        "id": "hyperloglog-algorithm",
+        "kind": "article",
+        "title": "This is why the HyperLogLog algorithm is my new favorite",
+        "publication": "freeCodeCamp",
+        "href": "https://medium.com/free-code-camp/my-favorite-algorithm-and-data-structure-hyperloglog-6583a25c8a4f",
+        "gradient": "cobalt"
+      },
+      {
+        "id": "benfords-law-fraud-detection",
+        "kind": "article",
+        "title": "Fraud detection using Benford’s Law (Python Code)",
+        "publication": "Towards Data Science",
+        "href": "https://medium.com/data-science/frawd-detection-using-benfords-law-python-code-9db8db474cf8",
+        "gradient": "sunset"
+      },
+      {
+        "id": "deep-learning-papers",
+        "kind": "article",
+        "title": "24 Really F***ing Interesting Deep Learning Papers",
+        "publication": "DataSeries",
+        "href": "https://medium.com/dataseries/24-really-f-ing-interesting-deep-learning-papers-fa26afe3a070",
+        "gradient": "orchid"
+      },
+      {
+        "id": "causal-machine-learning-creative-insights",
+        "kind": "article",
+        "title": "Causal Machine Learning for Creative Insights",
+        "publication": "Netflix Technology Blog",
+        "href": "https://medium.com/netflix-techblog/causal-machine-learning-for-creative-insights-4b0ce22a8a96",
+        "gradient": "aurora"
+      },
+      {
+        "id": "graphsage-paper-walkthrough",
+        "kind": "article",
+        "title": "GraphSAGE: Full Paper Walkthrough!",
+        "publication": "Medium",
+        "href": "https://medium.com/@arjuns0206/graphsage-full-paper-walkthrough-1b0ebd79afb4",
+        "gradient": "citrus"
+      },
+      {
+        "id": "the-tipping-point",
+        "kind": "book",
+        "title": "The Tipping Point",
+        "author": "Malcolm Gladwell",
+        "height": 184,
+        "gradient": "sunset"
+      },
+      {
+        "id": "a-thousand-splendid-suns",
+        "kind": "book",
+        "title": "A Thousand Splendid Suns",
+        "author": "Khaled Hosseini",
+        "height": 208,
+        "gradient": "orchid"
+      },
+      {
+        "id": "a-brief-history-of-intelligence",
+        "kind": "book",
+        "title": "A Brief History of Intelligence",
+        "author": "Max Bennett",
+        "height": 168,
+        "gradient": "cobalt"
+      },
+      {
+        "id": "subliminal",
+        "kind": "book",
+        "title": "Subliminal",
+        "author": "Leonard Mlodinow",
+        "height": 192,
+        "gradient": "citrus"
+      },
+      {
+        "id": "the-48-laws-of-power",
+        "kind": "book",
+        "title": "The 48 Laws of Power",
+        "author": "Robert Greene",
+        "height": 172,
+        "gradient": "sunset"
+      },
+      {
+        "id": "to-kill-a-mockingbird",
+        "kind": "book",
+        "title": "To Kill a Mockingbird",
+        "author": "Harper Lee",
+        "height": 160,
+        "gradient": "aurora"
+      },
+      {
+        "id": "the-fountainhead",
+        "kind": "book",
+        "title": "The Fountainhead",
+        "author": "Ayn Rand",
+        "height": 200,
+        "gradient": "cobalt"
+      },
+      {
+        "id": "blowout",
+        "kind": "book",
+        "title": "Blowout",
+        "author": "Rachel Maddow",
+        "height": 156,
+        "gradient": "orchid"
+      },
+      {
+        "id": "thinking-fast-and-slow",
+        "kind": "book",
+        "title": "Thinking, Fast and Slow",
+        "author": "Daniel Kahneman",
+        "height": 224,
+        "gradient": "citrus"
+      },
+      {
+        "id": "the-stranger",
+        "kind": "book",
+        "title": "The Stranger",
+        "author": "Albert Camus",
+        "height": 152,
+        "gradient": "sunset"
+      },
+      {
+        "id": "1984",
+        "kind": "book",
+        "title": "1984",
+        "author": "George Orwell",
+        "height": 176,
+        "gradient": "cobalt"
+      },
+      {
+        "id": "animal-farm",
+        "kind": "book",
+        "title": "Animal Farm",
+        "author": "George Orwell",
+        "height": 148,
+        "gradient": "aurora"
+      },
+      {
+        "id": "white-nights",
+        "kind": "book",
+        "title": "White Nights",
+        "author": "Fyodor Dostoevsky",
+        "height": 164,
+        "gradient": "orchid"
+      },
+      {
+        "id": "the-myth-of-sisyphus",
+        "kind": "book",
+        "title": "The Myth of Sisyphus",
+        "author": "Albert Camus",
+        "height": 168,
+        "gradient": "citrus"
+      },
+      {
+        "id": "the-castle",
+        "kind": "book",
+        "title": "The Castle",
+        "author": "Franz Kafka",
+        "height": 156,
+        "gradient": "sunset"
+      },
+      {
+        "id": "crime-and-punishment",
+        "kind": "book",
+        "title": "Crime and Punishment",
+        "author": "Fyodor Dostoevsky",
+        "height": 172,
+        "gradient": "cobalt"
+      },
+      {
+        "id": "surely-youre-joking-mr-feynman",
+        "kind": "book",
+        "title": "Surely You're Joking, Mr. Feynman!",
+        "author": "Richard P. Feynman",
+        "height": 164,
+        "gradient": "aurora"
+      },
+      {
+        "id": "psycho-cybernetics",
+        "kind": "book",
+        "title": "Psycho-Cybernetics",
+        "author": "Maxwell Maltz",
+        "height": 160,
+        "gradient": "orchid"
+      },
+      {
+        "id": "grit",
+        "kind": "book",
+        "title": "Grit",
+        "author": "Angela Duckworth",
+        "height": 152,
+        "gradient": "citrus"
+      },
+      {
+        "id": "the-odyssey",
+        "kind": "movie",
+        "title": "The Odyssey",
+        "year": "2026",
+        "gradient": "sunset"
+      },
+      {
+        "id": "high-and-low",
+        "kind": "movie",
+        "title": "High and Low",
+        "year": "1963",
+        "gradient": "orchid"
+      },
+      {
+        "id": "in-the-mood-for-love",
+        "kind": "movie",
+        "title": "In the Mood for Love",
+        "year": "2000",
+        "gradient": "sunset"
+      },
+      {
+        "id": "chungking-express",
+        "kind": "movie",
+        "title": "Chungking Express",
+        "year": "1994",
+        "gradient": "citrus"
+      },
+      {
+        "id": "parthenope",
+        "kind": "movie",
+        "title": "Parthenope",
+        "year": "2024",
+        "gradient": "aurora"
+      },
+      {
+        "id": "ikiru",
+        "kind": "movie",
+        "title": "Ikiru",
+        "year": "1952",
+        "gradient": "cobalt"
+      },
+      {
+        "id": "incendies",
+        "kind": "movie",
+        "title": "Incendies",
+        "year": "2010",
+        "gradient": "sunset"
+      },
+      {
+        "id": "the-whale",
+        "kind": "movie",
+        "title": "The Whale",
+        "year": "2022",
+        "gradient": "orchid"
+      },
+      {
+        "id": "black-swan",
+        "kind": "movie",
+        "title": "Black Swan",
+        "year": "2010",
+        "gradient": "cobalt"
+      },
+      {
+        "id": "phantom-thread",
+        "kind": "movie",
+        "title": "Phantom Thread",
+        "year": "2017",
+        "gradient": "orchid"
+      },
+      {
+        "id": "good-will-hunting",
+        "kind": "movie",
+        "title": "Good Will Hunting",
+        "year": "1997",
+        "gradient": "aurora"
+      },
+      {
+        "id": "grave-of-the-fireflies",
+        "kind": "movie",
+        "title": "Grave of the Fireflies",
+        "year": "1988",
+        "gradient": "sunset"
+      },
+      {
+        "id": "whiplash",
+        "kind": "movie",
+        "title": "Whiplash",
+        "year": "2014",
+        "gradient": "citrus"
+      },
+      {
+        "id": "the-handmaiden",
+        "kind": "movie",
+        "title": "The Handmaiden",
+        "year": "2016",
+        "gradient": "orchid"
+      },
+      {
+        "id": "parasite",
+        "kind": "movie",
+        "title": "Parasite",
+        "year": "2019",
+        "gradient": "aurora"
+      },
+      {
+        "id": "fight-club",
+        "kind": "movie",
+        "title": "Fight Club",
+        "year": "1999",
+        "gradient": "cobalt"
+      },
+      {
+        "id": "vaaranam-aayiram",
+        "kind": "movie",
+        "title": "Vaaranam Aayiram",
+        "year": "2008",
+        "gradient": "sunset"
+      },
+      {
+        "id": "sivaji-the-boss",
+        "kind": "movie",
+        "title": "Sivaji: The Boss",
+        "year": "2007",
+        "gradient": "citrus"
+      },
+      {
+        "id": "vada-chennai",
+        "kind": "movie",
+        "title": "Vada Chennai",
+        "year": "2018",
+        "gradient": "cobalt"
+      },
+      {
+        "id": "aftersun",
+        "kind": "movie",
+        "title": "Aftersun",
+        "year": "2022",
+        "gradient": "aurora"
+      },
+      {
+        "id": "2001-a-space-odyssey",
+        "kind": "movie",
+        "title": "2001: A Space Odyssey",
+        "year": "1968",
+        "gradient": "cobalt"
+      },
+      {
+        "id": "red-rocket",
+        "kind": "movie",
+        "title": "Red Rocket",
+        "year": "2021",
+        "gradient": "sunset"
+      },
+      {
+        "id": "green-book",
+        "kind": "movie",
+        "title": "Green Book",
+        "year": "2018",
+        "gradient": "orchid"
+      },
+      {
+        "id": "titane",
+        "kind": "movie",
+        "title": "Titane",
+        "year": "2021",
+        "gradient": "orchid"
       }
     ]
   },

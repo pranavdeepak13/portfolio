@@ -41,10 +41,6 @@ export function getRecommendationGroups(content: PortfolioContent) {
     books: items.filter((item): item is Extract<Recommendation, { kind: 'book' }> => item.kind === 'book'),
     movies: items.filter((item): item is Extract<Recommendation, { kind: 'movie' }> => item.kind === 'movie'),
     videos: items.filter((item): item is Extract<Recommendation, { kind: 'video' }> => item.kind === 'video'),
-    articles: items.filter((item): item is Extract<Recommendation, { kind: 'article' }> => item.kind === 'article'),
-    editorial: items.filter(
-      (item): item is Extract<Recommendation, { kind: 'video' | 'article' }> =>
-        item.kind === 'video' || item.kind === 'article'
-    )
+    articles: items.filter((item): item is Extract<Recommendation, { kind: 'article' }> => item.kind === 'article')
   }
 }
