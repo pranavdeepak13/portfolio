@@ -1,7 +1,7 @@
 ---
 title: "ModSwitch: keeping the small jobs close"
 description: Why I built a routing layer that gives simple coding tasks to a local model and checks the work before it returns.
-date: 2026-09-23
+date: 2026-09-24
 category: Projects
 published: true
 ---
@@ -25,3 +25,17 @@ ModSwitch has a Python core for routing, decomposition, local execution, verific
 The project is still an attempt, not a finished answer to agentic coding. I am building it to find out where local models save real time, where they create extra review work, and what a verifier has to catch before delegation is useful.
 
 The source is [on GitHub](https://github.com/pranavdeepak13/modswitch). I will write more about the decisions that survive contact with actual projects.
+
+## How the hand-off works
+
+The first step is not generation. ModSwitch looks at the request and breaks it into smaller pieces. A task such as removing unused imports or adding a focused test can be sent to a local model. The rest of the request stays with the cloud agent, which keeps the wider context and makes the larger decisions.
+
+There are two ways for that to happen. A hook can run before the host agent begins working, or the host agent can call ModSwitch through MCP when it finds a subtask that is narrow enough to delegate. In both cases, the local result comes back as a diff, not as an unverified claim that the task is finished.
+
+## Why verification matters
+
+The verifier runs the diff in a separate working copy and checks it from the cheapest test to the more expensive ones. It can reject malformed code, a change that touches files outside the task, lint or type errors, and failing tests. If something fails, the host agent receives the failure signal and can decide what to do next.
+
+That is the part I wanted to build around. Local models are useful for small jobs, but they need a way to be checked before their output becomes part of a project. ModSwitch is my attempt to make that hand-off practical without treating local output as automatically trustworthy.
+
+*hold my thoughts - pranav deepak*

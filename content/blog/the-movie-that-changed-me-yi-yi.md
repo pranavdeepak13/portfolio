@@ -1,7 +1,7 @@
 ---
 title: "Movies that changed me - Part 1: Yi Yi"
 description: Edward Yang's melodramatic real life story changed the way I pay attention to the ordinary things in life.
-date: 2026-09-18
+date: 2026-09-20
 category: Film
 published: true
 ---
@@ -26,10 +26,13 @@ As Mr Ota says " You don't live the same day twice", though they might seem mono
 An explicit shoutout to the static cinematography which is a pillar of strength of the movies narrative style and is a testament to the statement 
 "The heart and mind are the true lens of the camera".
 
-Enjoy the ordinary life, Celebrate the simplicity.
+Enjoy ordinary life. Celebrate simplicity.
+
 ## The part I want to keep
 
 I still have my own memory to put beside this film. It belongs with the scenes that made me stop treating daily life as something which is regular : the quiet rooms, the conversations that arrive late, and the people who are trying their best without knowing what they are missing.
 
 
 *Yi Yi* changed me because it made that attention feel like enough. Nothing needs to explode for a day to matter.
+
+*hold my thoughts - pranav deepak*

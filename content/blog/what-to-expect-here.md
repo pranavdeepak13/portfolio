@@ -1,7 +1,7 @@
 ---
 title: What to expect here
 description: Notes on the work, films, questions, and side projects that keep me thinking.
-date: 2026-09-25
+date: 2026-09-18
 category: Personal
 published: true
 ---
@@ -23,6 +23,14 @@ There will be opinions. There will be unfinished thoughts. I would rather leave 
 
 If you are here for the projects, they are still the centre of the portfolio. These posts are a collection of my thoughts.
 
+I want this space to hold the things that do not fit neatly inside a project card or a résumé. The ideas that come from building something, watching a film twice, getting a detail wrong.
+
+Some of these posts will arrive before I have a conclusion. That is part of the point.
+
 Raw. Unfiltered.
 
-The most personal is the most creative 
+I believe
+
+The most personal is the most creative - Martin Scorcesse
+
+*hold my thoughts - pranav deepak*
