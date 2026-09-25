@@ -1393,6 +1393,14 @@ textarea {
   margin: 1.4em 0 0;
 }
 
+.blog-prose img {
+  display: block;
+  width: 100%;
+  margin: 2em 0 0;
+  border-radius: 14px;
+  background: var(--surface);
+}
+
 .blog-prose h2,
 .blog-prose h3,
 .blog-prose h4 {
